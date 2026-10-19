@@ -39,6 +39,8 @@ class HomepageRendererTest {
         assertFalse(homepage.contains("First paragraph lead"));
         assertFalse(homepage.contains("First paragraph summary"));
         assertTrue(homepage.contains("bootstrap@5.3.8/dist/css/bootstrap.min.css"));
+        assertTrue(homepage.contains("<html lang=\"de\" data-bs-theme=\"dark\">"));
+        assertTrue(homepage.contains("<meta name=\"theme-color\" content=\"#0d1012\">"));
         assertTrue(homepage.contains("<link rel=\"stylesheet\" href=\"styles.css\">"));
         assertTrue(homepage.contains("aria-label=\"The Enchanted Horn Chronicle – Startseite\""));
         assertTrue(homepage.contains("<main id=\"main-content\" class=\"homepage-layout container-xxl"));

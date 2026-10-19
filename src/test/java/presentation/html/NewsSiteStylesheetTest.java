@@ -15,6 +15,8 @@ class NewsSiteStylesheetTest {
         assertTrue(css.contains(".site-header"));
         assertTrue(css.contains(".article-column"));
         assertTrue(css.contains(".lead-article"));
+        assertTrue(css.contains("--paper: #0d1012"));
+        assertTrue(css.contains("--ink: #f2eee7"));
         assertTrue(css.contains("@media (max-width: 640px)"));
     }
 }

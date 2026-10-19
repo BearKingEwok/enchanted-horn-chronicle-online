@@ -21,6 +21,7 @@ class NewsPageRendererTest {
 
         assertTrue(renderedPage.contains("<title>Drachenrat beschließt autofreien Montag – The Enchanted Horn Chronicle</title>"));
         assertTrue(renderedPage.contains("bootstrap@5.3.8/dist/css/bootstrap.min.css"));
+        assertTrue(renderedPage.contains("<html lang=\"de\" data-bs-theme=\"dark\">"));
         assertTrue(renderedPage.contains("<link rel=\"stylesheet\" href=\"../styles.css\">"));
         assertTrue(renderedPage.contains("<main id=\"main-content\" class=\"article-layout container-xxl"));
         assertTrue(renderedPage.contains("<a class=\"back-link\" href=\"../index.html\">Zurück zur Startseite</a>"));

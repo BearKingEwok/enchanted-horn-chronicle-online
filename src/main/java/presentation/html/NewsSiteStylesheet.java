@@ -5,14 +5,15 @@ public final class NewsSiteStylesheet {
     public String render() {
         return """
                 :root {
-                    --paper: #f7f4ee;
-                    --surface: #fffdf8;
-                    --ink: #191816;
-                    --muted: #69645d;
-                    --line: #d8d0c4;
-                    --accent: #7b1735;
-                    --accent-dark: #541025;
-                    --gold: #aa8344;
+                    --paper: #0d1012;
+                    --surface: #161a1d;
+                    --surface-raised: #1c2125;
+                    --ink: #f2eee7;
+                    --muted: #aaa49b;
+                    --line: #373d41;
+                    --accent: #e26687;
+                    --accent-dark: #9f2f51;
+                    --gold: #c6a15d;
                     --serif: Georgia, "Times New Roman", serif;
                     --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
                 }
@@ -53,7 +54,7 @@ public final class NewsSiteStylesheet {
                 }
 
                 .site-header {
-                    background: var(--surface);
+                    background: #101315;
                     border-bottom: 1px solid var(--line);
                 }
 
@@ -84,7 +85,7 @@ public final class NewsSiteStylesheet {
                     place-items: center;
                     flex: 0 0 auto;
                     color: var(--surface);
-                    background: var(--accent);
+                    background: var(--accent-dark);
                     border: 2px solid var(--gold);
                     border-radius: 50%;
                     font: 800 0.78rem/1 var(--sans);
@@ -147,7 +148,7 @@ public final class NewsSiteStylesheet {
                     place-content: center;
                     padding: 1.25rem;
                     text-align: center;
-                    background: repeating-linear-gradient(-45deg, transparent, transparent 8px, rgba(123, 23, 53, 0.035) 8px, rgba(123, 23, 53, 0.035) 16px);
+                    background: repeating-linear-gradient(-45deg, transparent, transparent 8px, rgba(226, 102, 135, 0.06) 8px, rgba(226, 102, 135, 0.06) 16px);
                 }
 
                 .advertisement span {
@@ -164,7 +165,7 @@ public final class NewsSiteStylesheet {
                 .editorial-rail {
                     padding: 1.25rem;
                     border-top: 3px solid var(--accent);
-                    background: var(--surface);
+                    background: var(--surface-raised);
                 }
 
                 .editorial-rail h2 {
@@ -181,9 +182,9 @@ public final class NewsSiteStylesheet {
                 .lead-article {
                     margin-bottom: 1rem;
                     padding: clamp(1.5rem, 4vw, 3rem);
-                    background: var(--surface);
+                    background: var(--surface-raised);
                     border-top: 5px solid var(--accent);
-                    box-shadow: 0 18px 50px rgba(41, 31, 24, 0.08);
+                    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
                 }
 
                 .lead-article h1,
@@ -261,9 +262,9 @@ public final class NewsSiteStylesheet {
                 }
 
                 .article-column {
-                    background: var(--surface);
+                    background: var(--surface-raised);
                     padding: clamp(1.4rem, 4vw, 3.5rem);
-                    box-shadow: 0 18px 50px rgba(41, 31, 24, 0.07);
+                    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
                 }
 
                 .back-link {
