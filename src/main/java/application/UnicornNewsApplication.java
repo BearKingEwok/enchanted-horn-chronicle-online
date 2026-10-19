@@ -7,6 +7,7 @@ import persistence.NewsArticleData;
 import presentation.html.HomepageRenderer;
 import presentation.html.NewsArticleHtmlRenderer;
 import presentation.html.NewsPageRenderer;
+import presentation.html.NewsSiteStylesheet;
 import usecases.GeneratedPage;
 import usecases.NewsSiteGenerator;
 
@@ -45,6 +46,10 @@ public class UnicornNewsApplication {
         htmlFileWriter.write(
                 directory.resolve("index.html"),
                 newsSiteGenerator.generateHomepage(publishedArticles)
+        );
+        htmlFileWriter.write(
+                directory.resolve("styles.css"),
+                new NewsSiteStylesheet().render()
         );
         for (GeneratedPage page : newsSiteGenerator.generateArticlePages(publishedArticles)) {
             Path target = directory.resolve(page.relativePath());

@@ -17,24 +17,37 @@ public class NewsPageRenderer {
 
         return """
                 <!doctype html>
-                <html lang="de">
+                <html lang="de" data-bs-theme="dark">
                 <head>
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <meta charset="UTF-8">
+                    <meta name="theme-color" content="#0d1012">
                     <title>%s – The Enchanted Horn Chronicle</title>
+                    %s
                 </head>
                 <body>
-                    <nav>
-                        <a class="back-link" href="../index.html">Zurück zur Startseite</a>
-                    </nav>
-                    <main>
-                        %s
+                    %s
+                    <main id="main-content" class="article-layout container-xxl py-4 py-lg-5">
+                        <div class="row g-4 g-xl-5">
+                            <aside class="col-xl-2 d-none d-xl-block rail editorial-rail" aria-label="Weitere Artikel">
+                                <h2>Weitere Artikel</h2>
+                                <p>Empfehlungen aus demselben Ressort folgen in einer kommenden Ausgabe.</p>
+                            </aside>
+                            <div class="col-12 col-xl-8 article-column">
+                                <a class="back-link" href="../index.html">Zurück zur Startseite</a>
+                                %s
+                            </div>
+                            %s
+                        </div>
                     </main>
                 </body>
                 </html>
                 """.formatted(
                 HtmlEscaper.escapeTextContent(article.headline()),
-                renderedArticle
+                NewsSiteChrome.renderStylesheets("../"),
+                NewsSiteChrome.renderHeader("../"),
+                renderedArticle,
+                NewsSiteChrome.renderAdvertisement("Werbung rechts")
         );
     }
 
