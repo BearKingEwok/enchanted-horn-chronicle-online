@@ -49,13 +49,7 @@ public final class NewsArticleHtmlRenderer {
             html.append(" class=\"").append(className).append('"');
         }
         html.append('>')
-                .append(escapeTextContent(content))
+                .append(HtmlEscaper.escapeTextContent(content))
                 .append("</").append(tag).append(">\n");
-    }
-
-    private String escapeTextContent(String text) {
-        return text.replace("&", "&amp;")
-                .replace("<", "&lt;")
-                .replace(">", "&gt;");
     }
 }
