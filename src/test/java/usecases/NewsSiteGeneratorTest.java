@@ -4,6 +4,7 @@ import domain.NewsArticle;
 import domain.PublishedArticle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import presentation.html.HomepageRenderer;
 import presentation.html.NewsArticleHtmlRenderer;
 import presentation.html.NewsPageRenderer;
 
@@ -65,7 +66,10 @@ class NewsSiteGeneratorTest {
     void setUp() {
         renderer = new NewsArticleHtmlRenderer();
         newsPageRenderer = new NewsPageRenderer(renderer);
-        newsSiteGenerator = new NewsSiteGenerator(newsPageRenderer);
+        newsSiteGenerator = new NewsSiteGenerator(
+                new HomepageRenderer(),
+                newsPageRenderer
+        );
     }
 
     @Test
@@ -124,7 +128,7 @@ class NewsSiteGeneratorTest {
 
     @Test
     void generatesOneDetailPageForEachArticle() {
-        List<String> articlePages = newsSiteGenerator.generateArticlePages(
+        List<GeneratedPage> articlePages = newsSiteGenerator.generateArticlePages(
                 List.of(MIDDLE_ARTICLE, OLDEST_ARTICLE, NEWEST_ARTICLE)
         );
 
@@ -132,9 +136,9 @@ class NewsSiteGeneratorTest {
 
         for (String marker : List.of("oldest", "middle", "newest")) {
             long pagesForArticle = articlePages.stream()
-                    .filter(page -> page.contains("Headline " + marker))
-                    .filter(page -> page.contains("First paragraph " + marker))
-                    .filter(page -> page.contains("Second paragraph " + marker))
+                    .filter(page -> page.html().contains("Headline " + marker))
+                    .filter(page -> page.html().contains("First paragraph " + marker))
+                    .filter(page -> page.html().contains("Second paragraph " + marker))
                     .count();
 
             assertEquals(1, pagesForArticle);
@@ -142,8 +146,20 @@ class NewsSiteGeneratorTest {
 
         assertTrue(articlePages.stream().allMatch(page ->
                 Stream.of("oldest", "middle", "newest")
-                        .filter(marker -> page.contains("Headline " + marker))
+                        .filter(marker -> page.html().contains("Headline " + marker))
                         .count() == 1
+        ));
+
+        assertEquals(
+                List.of(
+                        "articles/" + NEWEST_ID + ".html",
+                        "articles/" + MIDDLE_ID + ".html",
+                        "articles/" + OLDEST_ID + ".html"
+                ),
+                articlePages.stream().map(GeneratedPage::relativePath).toList()
+        );
+        assertTrue(articlePages.stream().allMatch(page ->
+                page.html().contains("href=\"../index.html\"")
         ));
     }
 }

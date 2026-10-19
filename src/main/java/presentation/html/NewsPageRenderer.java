@@ -2,7 +2,6 @@ package presentation.html;
 
 import domain.NewsArticle;
 
-import java.util.List;
 import java.util.Objects;
 
 public class NewsPageRenderer {
@@ -12,18 +11,9 @@ public class NewsPageRenderer {
         this.articleRenderer = articleRenderer;
     }
 
-    public String render(List<NewsArticle> articles) {
-        Objects.requireNonNull(articles);
-        String joinedArticles;
-
-        if (articles.isEmpty()) {
-            joinedArticles = "";
-        } else {
-            joinedArticles = articles.stream()
-                    .map(articleRenderer::render)
-                    .reduce((a1, a2) -> a1 + "\n" + a2)
-                    .orElse("");
-        }
+    public String render(NewsArticle article) {
+        Objects.requireNonNull(article, "article must not be null");
+        String renderedArticle = articleRenderer.render(article);
 
         return """
                 <!doctype html>
@@ -31,15 +21,21 @@ public class NewsPageRenderer {
                 <head>
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <meta charset="UTF-8">
-                    <title>The Enchanted Horn Chronicle</title>
+                    <title>%s – The Enchanted Horn Chronicle</title>
                 </head>
                 <body>
+                    <nav>
+                        <a class="back-link" href="../index.html">Zurück zur Startseite</a>
+                    </nav>
                     <main>
                         %s
                     </main>
                 </body>
                 </html>
-                """.formatted(joinedArticles);
+                """.formatted(
+                HtmlEscaper.escapeTextContent(article.headline()),
+                renderedArticle
+        );
     }
 
 }
