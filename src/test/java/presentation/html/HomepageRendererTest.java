@@ -38,13 +38,19 @@ class HomepageRendererTest {
         assertFalse(homepage.contains("Lead summary"));
         assertFalse(homepage.contains("First paragraph lead"));
         assertFalse(homepage.contains("First paragraph summary"));
+        assertTrue(homepage.contains("bootstrap@5.3.8/dist/css/bootstrap.min.css"));
+        assertTrue(homepage.contains("<link rel=\"stylesheet\" href=\"styles.css\">"));
+        assertTrue(homepage.contains("aria-label=\"The Enchanted Horn Chronicle – Startseite\""));
+        assertTrue(homepage.contains("<main id=\"main-content\" class=\"homepage-layout container-xxl"));
+        assertTrue(homepage.contains("aria-label=\"Werbung links\""));
+        assertTrue(homepage.contains("aria-label=\"Werbung rechts\""));
     }
 
     @Test
     void rendersEmptyHomepageForEmptyArticleList() {
         String homepage = renderer.render(List.of());
 
-        assertTrue(homepage.contains("<main>"));
+        assertTrue(homepage.contains("<main id=\"main-content\""));
         assertFalse(homepage.contains("<article"));
     }
 
