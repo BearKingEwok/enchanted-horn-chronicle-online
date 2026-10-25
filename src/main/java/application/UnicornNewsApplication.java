@@ -1,9 +1,9 @@
 package application;
 
-import domain.NewsArticle;
 import domain.PublishedArticle;
 import persistence.HtmlFileWriter;
 import persistence.NewsArticleData;
+import persistence.PublishedArticleData;
 import presentation.html.HomepageRenderer;
 import presentation.html.NewsArticleHtmlRenderer;
 import presentation.html.NewsPageRenderer;
@@ -14,9 +14,7 @@ import usecases.NewsSiteGenerator;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.Instant;
 import java.util.List;
-import java.util.UUID;
 
 public class UnicornNewsApplication {
     static void main(String[] args) throws IOException {
@@ -28,17 +26,8 @@ public class UnicornNewsApplication {
                 newsPageRenderer
         );
         HtmlFileWriter htmlFileWriter = new HtmlFileWriter();
-        List<NewsArticle> articles = new NewsArticleData().getAusgabe1386();
-        List<PublishedArticle> publishedArticles = articles.stream()
-                .map(
-                        newsArticle ->
-                                new PublishedArticle(
-                                        UUID.randomUUID(),
-                                        newsArticle,
-                                        Instant.now()
-                                )
-                )
-                .toList();
+        List<PublishedArticle> publishedArticles =
+                new PublishedArticleData(new NewsArticleData()).getPublished1386();
 
         Path directory = Path.of("target/site");
         Files.createDirectories(directory);
